@@ -1,0 +1,56 @@
+<html>
+	<body>
+		<h2>JSON Test</h2>
+		<p id="jsonText"></p>
+		<script>
+			var xhr = new XMLHttpRequest();			
+			var url = "http://www.w3schools.com/js/customers_mysql.php"
+			//var url = "data.json";
+			var myData; 
+			
+			xhr.overrideMimeType("application/json");
+			xhr.onreadystatechange=function() {
+				if (this.readyState == 4 && this.status == 200) {
+					testFunc (this.responseText);
+				}
+			}
+			
+			xhr.open("GET", url, true);
+			xhr.send();
+			
+			function testFunc (response)
+			{				
+			//var data =ll '[{"name" : "Dev", "age" : [{"test1": 3, "test2": 4}] },{"name" : "Test", "age" : "20"}]';
+			var data = '{"employees": [{"name" : "Dev", "age" : {"test1": [30,40]} },{"name" : "Dude", "age" : "20"}]}';
+			
+			var myData = JSON.parse(data, (key, value) =>
+				typeof value === 'number'
+				? value * 2
+				: value 
+				);
+							
+			/*var myData = JSON.parse(data, function (key, value) {
+				return typeof value === 'number'
+				? value * 2
+				: value 
+				} );*/
+			
+			//myData = JSON.parse (response);
+			
+			var arr = myData.employees.map(function(s) { return s.name });
+			var arr = myData.employees.map (s => s.age);
+			
+			/*var st1 = () => "Hello";
+			var st2 = st1();
+			alert (st2);*/
+			
+			var jsonText1 = document.getElementById('jsonText');
+			//jsonText1.innerHTML = myData[0].Name + " " + myData[0].City + " " + myData[0].Country;
+			//jsonText.innerHTML = "hello";
+			jsonText1.innerHTML = myData.employees[0].name + " " + myData.employees[0].age.test1[0];
+			//jsonText.innerHTML = JSON.stringify("x",
+			}
+			
+		</script>
+	</body>
+</html>
