@@ -1,4 +1,4 @@
-// app/index.js - adding a new line dbranchnewstuff
+// app/index.js - adding a new line in main branch
 
 const calc = require('./calc')
 const numToAdd = [3, 4, 5, 6]
